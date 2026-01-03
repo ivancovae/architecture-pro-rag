@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  rag-bot:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: rag_bot
+    restart: unless-stopped
+
+    environment:
+      BOT_TOKEN: ${BOT_TOKEN}
+
+    volumes:
+      # FAISS индекс и чанки
+      - ../task3/faiss.index:/app/task3/faiss.index
+      - ../task3/chunks.jsonl:/app/task3/chunks.jsonl
+      - ../task3/chunks_meta.json:/app/task3/chunks_meta.json
+
+      # Модель LLM
+      - ../task4/models:/app/task4/models
+
+      # Логи
+      - ../task7:/app/task7
+
+    working_dir: /app
