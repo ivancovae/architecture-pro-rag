@@ -1,11 +1,15 @@
 import faiss
+import os
 import numpy as np
 import json
 from pathlib import Path
 
-EMB_FILE = Path("embeddings.npy")
-META_FILE = Path("chunks_meta.json")
-INDEX_FILE = Path("faiss.index")
+
+TASK3_DIR = Path("Task3")
+
+EMB_FILE = os.path.abspath(str(Path(TASK3_DIR / "embeddings.npy")))
+META_FILE = os.path.abspath(str(Path(TASK3_DIR / "chunks_meta.json")))
+INDEX_FILE = os.path.abspath(str(Path(TASK3_DIR / "faiss.index")))
 
 # Загружаем эмбеддинги
 embeddings = np.load(EMB_FILE)

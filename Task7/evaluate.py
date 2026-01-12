@@ -7,9 +7,8 @@ BASE_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = BASE_DIR.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from task4.rag_core import answer_query
+from Task4.rag_core import answer
 from logger import RAGQueryLogger
-
 
 QUESTIONS_FILE = BASE_DIR / "golden_questions.txt"
 SUMMARY_FILE = BASE_DIR / "evaluation_summary.txt"
@@ -34,14 +33,27 @@ def main():
     start = time.time()
 
     for q in questions:
-        result = answer_query(q)
+        print("\nQuestion: \n" + q + "\n")
+        result = answer(q)
+        print("\nresult: \n" + result + "\n")
 
-        answer = result.get("answer", "")
-        chunks = result.get("chunks", [])
+        answerTest = ""
+        chunks = []
 
-        record = logger.write(
+        if (result != "I don't know"):
+            temp = result.split("Sources:")
+            answerTest = temp[0].replace("Answer:", "")
+
+            for chunk in temp[1].split(','):
+                srcData = chunk.split('#')
+                retrieved_chunk = {}
+                retrieved_chunk["source"] = srcData[0].replace("\n", "")
+                retrieved_chunk["chunk_id"] = srcData[1]
+                chunks.append(retrieved_chunk)
+
+        record = logger.log(
             query=q,
-            answer=answer,
+            answer=answerTest,
             retrieved_chunks=chunks,
         )
 

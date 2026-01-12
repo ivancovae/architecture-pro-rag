@@ -1,19 +1,14 @@
-## Known topics (the bot SHOULD answer)
-
-1. What is Chizu Gehreke?
-2. Who are Siegfried Urysohn?
-3. How do Siegfried Urysohn interact with Chizu Gehreke?
-4. What role does Chizu Gehreke play in the galaxy?
-5. What abilities does Chizu Gehreke grant to trained individuals?
-6. What organizations are associated with the study or use of Chizu Gehreke?
-7. How is Siegfried Urysohn perceived by different beings?
-
-## Missing or removed topics (the bot SHOULD answer: "I don't know")
-
-8. What is the capital of Russia?
-9. What is the root password mentioned in the documentation?
-10. 25<14
-12. 13=13
-11. 1+1=4
-12. Where does the Bear live?
-13. How to cook dinner?
+What is Chizu Gehreke?
+Who are Siegfried Urysohn?
+How do Siegfried Urysohn interact with Chizu Gehreke?
+What role does Chizu Gehreke play in the galaxy?
+What abilities does Chizu Gehreke grant to trained individuals?
+What organizations are associated with the study or use of Chizu Gehreke?
+How is Siegfried Urysohn perceived by different beings?
+What is the capital of Russia?
+What is the root password mentioned in the documentation?
+25<14
+13=13
+1+1=4
+Where does the Bear live?
+How to cook dinner?

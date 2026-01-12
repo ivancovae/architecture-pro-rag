@@ -3,7 +3,7 @@ import faiss
 from sentence_transformers import SentenceTransformer
 from llama_cpp import Llama
 
-from config import (
+from Task4.config import (
     FAISS_INDEX, CHUNKS_JSONL, META_JSON,
     MODEL_PATH, TOP_K, UNKNOWN_THRESHOLD
 )
@@ -31,7 +31,9 @@ def retrieve(query: str):
         results.append({
             "dist": float(dist),
             "text": CHUNKS[idx],
-            "src": f"{META[idx]['source']}#{META[idx]['chunk_id']}"
+            "src": f"{META[idx]['source']}#{META[idx]['chunk_id']}",
+            "chunk_id": META[idx]['chunk_id'],
+            "global_id": int(idx),
         })
     return results
 
@@ -47,8 +49,9 @@ def build_prompt(query, retrieved):
         "1) Use ONLY the CONTEXT.\n"
         "2) If answer not found — say exactly: I don't know.\n"
         "3) Explain reasoning briefly.\n"
-        "Format:\n"
-        "Steps:\n- ...\nAnswer: ...\nSources: ...\n"
+        "Output format:\n"
+        "Answer: ... \n"
+        "Sources: list of sources in form filename#chunk_id.\n"
     )
 
     user = f"""

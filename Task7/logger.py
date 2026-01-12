@@ -37,7 +37,6 @@ class RAGQueryLogger:
                 {
                     "source": c.get("source"),
                     "chunk_id": c.get("chunk_id"),
-                    "distance": c.get("distance"),
                 }
                 for c in retrieved_chunks
             ],

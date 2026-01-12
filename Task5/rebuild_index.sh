@@ -1,3 +1,3 @@
 #!/bin/bash
-python ../task3/chunk_documents.py
-python ../task3/build_faiss_index.py
+python ../Task3/chunk_documents.py
+python ../Task3/build_faiss_index.py
