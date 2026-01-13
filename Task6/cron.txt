@@ -1,0 +1,2 @@
+# Обновление базы знаний каждый день в 06:00
+0 6 * * * /usr/bin/python update_index.py >> update.log 2>&1

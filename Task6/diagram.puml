@@ -1,0 +1,19 @@
+@startuml
+actor Scheduler
+
+rectangle "docs/" as Docs
+component "update_index.py" as UpdateIndexScript
+component "Chunker" as Chunker
+component "SentenceTransformer\n(all-MiniLM-L6-v2)" as EmbeddingModel
+database "FAISS index\n(task3/faiss.index)" as FAISS
+file "state.json" as StateFile
+file "update.log" as Logs
+
+Scheduler -> UpdateIndexScript : cron запускает по расписанию
+UpdateIndexScript -> Docs : сканируем файлы
+UpdateIndexScript -> Chunker : формируем чанки документов
+Chunker -> EmbeddingModel : кодируем чанки
+EmbeddingModel -> FAISS : добавляем вектора
+UpdateIndexScript -> StateFile : пишем хеши обработаных файлов
+UpdateIndexScript -> Logs : добавляем статусы и ошибки
+@enduml

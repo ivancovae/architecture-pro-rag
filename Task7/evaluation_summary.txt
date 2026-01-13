@@ -1,0 +1,6 @@
+Evaluation time: 2026-01-12T18:41:33.488403
+Total questions: 14
+Successful answers: 7
+Failed answers: 7
+No chunks found: 7
+Execution time: 574.51s

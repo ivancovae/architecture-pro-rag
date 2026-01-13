@@ -1,0 +1,46 @@
+@startuml
+title RAG: обработка запроса и оценка качества ответа
+
+actor User
+participant "RAG Bot" as Bot
+participant "Embedding Model\n(all-MiniLM-L6-v2)" as Embedder
+participant "FAISS Index" as Index
+participant "LLM\n(Mistral 7B Local)" as LLM
+participant "Query Logger\n(logs.jsonl)" as Logger
+participant "Evaluator\n(evaluate.py)" as Eval
+
+== Основной поток ==
+User -> Bot : Вопрос
+Bot -> Embedder : encode(query)
+Embedder --> Bot : query_embedding
+
+Bot -> Index : search(top_k)
+Index --> Bot : chunks / empty
+
+alt Чанки найдены
+    Bot -> LLM : prompt + context
+    LLM --> Bot : answer
+else Чанки не найдены
+    Bot --> User : "I don't know"
+end
+
+Bot -> Logger : log(query, answer, sources, success)
+
+== Автоматическая оценка ==
+Eval -> Logger : read logs
+Eval -> Eval : анализ успешности
+Eval -> Eval : выявление пробелов знаний
+
+== Возможные точки сбоя ==
+note right of Index
+пустой индекс, удалённые сущности, невалидные чанки
+end note
+
+note right of LLM
+галлюцинация, отказ генерации, слишком короткий ответ
+end note
+
+note right of Logger
+некорректный лог, пропуск источников
+end note
+@enduml
